@@ -21,8 +21,7 @@ func TestFreeTypeGetTextSize(t *testing.T) {
 
 	ft.LoadFontData("../fonts/JetBrainsMono-Regular.ttf", 0)
 
-	baseLine := 0
-	size := ft.GetTextSize("test", 60, 2, &baseLine)
+	size, baseLine := ft.GetTextSize("test", 60, 2)
 
 	if size.X != 140 {
 		t.Error("Invalid text size width")

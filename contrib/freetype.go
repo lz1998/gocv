@@ -90,14 +90,14 @@ func (f *FreeType2) PutText(img *gocv.Mat, text string, org image.Point,
 // For further details, please see:
 // https://docs.opencv.org/master/d9/dfa/classcv_1_1freetype_1_1FreeType2.html#af135a132505125bdea74b378dda3bb5d
 //
-func (f *FreeType2) GetTextSize(text string, fontHeight int, thickness int, baseLine *int) image.Point {
+func (f *FreeType2) GetTextSize(text string, fontHeight int, thickness int) (image.Point, int) {
 	cText := C.CString(text)
 	defer C.free(unsafe.Pointer(cText))
-	var cBaseLine C.int = C.int(*baseLine)
+	cBaseLine := C.int(0)
+
 	sz := C.FreeType2_GetTextSize((C.FreeType2)(f.p), cText, C.int(fontHeight), C.int(thickness), &cBaseLine)
-	*baseLine = int(cBaseLine)
 	return image.Point{
 		X: int(sz.width),
 		Y: int(sz.height),
-	}
+	}, int(cBaseLine)
 }
