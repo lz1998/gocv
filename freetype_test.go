@@ -10,30 +10,28 @@ func TestFreeTypeLoadFontData(t *testing.T) {
 	ft := NewFreeType2()
 	defer ft.Close()
 
-	ft.LoadFontData("/System/Library/Fonts/ArialHB.ttc", 0)
+	ft.LoadFontData("fonts/JetBrainsMono-Regular.ttf", 0)
 }
 
 func TestFreeTypeGetTextSize(t *testing.T) {
 	ft := NewFreeType2()
 	defer ft.Close()
 
-	ft.LoadFontData("/System/Library/Fonts/ArialHB.ttc", 0)
+	ft.LoadFontData("fonts/JetBrainsMono-Regular.ttf", 0)
 
 	baseLine := 0
 	size := ft.GetTextSize("test", 60, 2, &baseLine)
-	t.Log(size)
-	t.Log(baseLine)
 
-	if size.X != 169 {
+	if size.X != 140 {
 		t.Error("Invalid text size width")
 	}
 
-	if size.Y != 40 {
+	if size.Y != 46 {
 		t.Error("Invalid text size height")
 	}
 
-	if baseLine != 0 {
-		t.Errorf("invalid base. expected %d, actual %d", 0, baseLine)
+	if baseLine != 1 {
+		t.Errorf("invalid base. expected %d, actual %d", 1, baseLine)
 	}
 }
 
@@ -41,7 +39,7 @@ func TestFreeTypePutText(t *testing.T) {
 	ft := NewFreeType2()
 	defer ft.Close()
 
-	ft.LoadFontData("/System/Library/Fonts/Times.ttc", 0)
+	ft.LoadFontData("fonts/JetBrainsMono-Regular.ttf", 0)
 
 	img := NewMatWithSize(150, 500, MatTypeCV8UC3)
 	if img.Empty() {
@@ -61,6 +59,6 @@ func TestFreeTypeSetSplitNumber(t *testing.T) {
 	ft := NewFreeType2()
 	defer ft.Close()
 
-	ft.LoadFontData("/System/Library/Fonts/Times.ttc", 0)
+	ft.LoadFontData("fonts/JetBrainsMono-Regular.ttf", 0)
 	ft.SetSplitNumber(10)
 }
