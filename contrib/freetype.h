@@ -7,7 +7,7 @@
 extern "C" {
 #endif
 
-#include "core.h"
+#include "../core.h"
 
 #ifdef __cplusplus
 typedef cv::Ptr<cv::freetype::FreeType2>* FreeType2;

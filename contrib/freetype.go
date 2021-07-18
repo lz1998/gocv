@@ -1,4 +1,4 @@
-package gocv
+package contrib
 
 /*
 #include <stdlib.h>
@@ -9,6 +9,8 @@ import (
 	"image"
 	"image/color"
 	"unsafe"
+
+	"gocv.io/x/gocv"
 )
 
 type FreeType2 struct {
@@ -61,7 +63,7 @@ func (f *FreeType2) SetSplitNumber(num int) {
 // For further details, please see:
 // https://docs.opencv.org/master/d9/dfa/classcv_1_1freetype_1_1FreeType2.html#aba641f774c47a70eaeb76bf7aa865915
 //
-func (f *FreeType2) PutText(img *Mat, text string, org image.Point,
+func (f *FreeType2) PutText(img *gocv.Mat, text string, org image.Point,
 	fontHeight int, c color.RGBA, thickness int, lineType int, bottomLeftOrigin bool) {
 	cText := C.CString(text)
 	defer C.free(unsafe.Pointer(cText))
@@ -78,7 +80,7 @@ func (f *FreeType2) PutText(img *Mat, text string, org image.Point,
 		val4: C.double(c.A),
 	}
 
-	C.FreeType2_PutText((C.FreeType2)(f.p), img.p, cText, sOrg, C.int(fontHeight), sColor, C.int(thickness), C.int(lineType), C.bool(bottomLeftOrigin))
+	C.FreeType2_PutText((C.FreeType2)(f.p), (C.Mat)(img.Ptr()), cText, sOrg, C.int(fontHeight), sColor, C.int(thickness), C.int(lineType), C.bool(bottomLeftOrigin))
 }
 
 // GetTextSize calculates the width and height of a text string.
