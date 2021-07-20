@@ -64,7 +64,7 @@ func (f *FreeType2) SetSplitNumber(num int) {
 // https://docs.opencv.org/master/d9/dfa/classcv_1_1freetype_1_1FreeType2.html#aba641f774c47a70eaeb76bf7aa865915
 //
 func (f *FreeType2) PutText(img *gocv.Mat, text string, org image.Point,
-	fontHeight int, c color.RGBA, thickness int, lineType int, bottomLeftOrigin bool) {
+	fontHeight int, c color.RGBA, thickness int, lineType gocv.LineType, bottomLeftOrigin bool) {
 	cText := C.CString(text)
 	defer C.free(unsafe.Pointer(cText))
 
