@@ -44,12 +44,12 @@ func TestFreeTypePutText(t *testing.T) {
 
 	img := gocv.NewMatWithSize(150, 500, gocv.MatTypeCV8UC3)
 	if img.Empty() {
-		t.Error("Invalid Mat in IMRead")
+		t.Error("Invalid Mat")
 	}
 	defer img.Close()
 
 	pt := image.Pt(80, 80)
-	ft.PutText(&img, "Testing", pt, 60, color.RGBA{255, 255, 255, 0}, 2, 8, true)
+	ft.PutText(&img, "Testing", pt, 60, color.RGBA{R: 255, G: 255, B: 255}, 2, 8, true)
 
 	if img.Empty() {
 		t.Error("Error in PutText test")
